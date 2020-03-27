@@ -1,0 +1,46 @@
+entity Resource {
+   url String,
+   isFavourite Boolean 
+}
+
+entity Metadata {
+  createdDate Instant,
+  title String,
+  comment String
+}
+
+entity Author {
+    firstName String,
+	lastName String,
+	email String
+}
+
+/** not an ignored comment */
+entity Location {
+	lon Float,
+    lat Float
+}
+
+relationship OneToOne {
+	Resource{metadata} to Metadata,
+    Metadata{location} to Location
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+    Author to Resource{author},
+    Resource{author} to Author
+}
+
+// Set pagination options
+paginate Resource with infinite-scroll
+paginate Author with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all
+service all with serviceImpl 
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

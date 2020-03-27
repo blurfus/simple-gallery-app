@@ -1,0 +1,26 @@
+{
+    "name": "Location",
+    "fields": [
+        {
+            "fieldName": "lon",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "lat",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200327040900",
+    "javadoc": "not an ignored comment",
+    "entityTableName": "location",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

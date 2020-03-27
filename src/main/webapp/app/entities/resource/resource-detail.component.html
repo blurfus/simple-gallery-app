@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="resource">
+            <h2><span jhiTranslate="galleryApp.resource.detail.title">Resource</span> {{ resource.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="galleryApp.resource.url">Url</span></dt>
+                <dd>
+                    <span>{{ resource.url }}</span>
+                </dd>
+                <dt><span jhiTranslate="galleryApp.resource.isFavourite">Is Favourite</span></dt>
+                <dd>
+                    <span>{{ resource.isFavourite }}</span>
+                </dd>
+                <dt><span jhiTranslate="galleryApp.resource.metadata">Metadata</span></dt>
+                <dd>
+                    <div *ngIf="resource.metadata">
+                        <a [routerLink]="['/metadata', resource.metadata?.id, 'view']">{{ resource.metadata?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="galleryApp.resource.author">Author</span></dt>
+                <dd>
+                    <div *ngIf="resource.author">
+                        <a [routerLink]="['/author', resource.author?.id, 'view']">{{ resource.author?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/resource', resource.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

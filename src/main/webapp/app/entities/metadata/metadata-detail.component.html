@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="metadata">
+            <h2><span jhiTranslate="galleryApp.metadata.detail.title">Metadata</span> {{ metadata.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="galleryApp.metadata.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{ metadata.createdDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="galleryApp.metadata.title">Title</span></dt>
+                <dd>
+                    <span>{{ metadata.title }}</span>
+                </dd>
+                <dt><span jhiTranslate="galleryApp.metadata.comment">Comment</span></dt>
+                <dd>
+                    <span>{{ metadata.comment }}</span>
+                </dd>
+                <dt><span jhiTranslate="galleryApp.metadata.location">Location</span></dt>
+                <dd>
+                    <div *ngIf="metadata.location">
+                        <a [routerLink]="['/location', metadata.location?.id, 'view']">{{ metadata.location?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/metadata', metadata.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

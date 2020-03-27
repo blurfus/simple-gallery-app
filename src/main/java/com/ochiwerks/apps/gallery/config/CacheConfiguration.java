@@ -40,6 +40,12 @@ public class CacheConfiguration {
             createCache(cm, com.ochiwerks.apps.gallery.domain.User.class.getName());
             createCache(cm, com.ochiwerks.apps.gallery.domain.Authority.class.getName());
             createCache(cm, com.ochiwerks.apps.gallery.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.ochiwerks.apps.gallery.domain.Resource.class.getName());
+            createCache(cm, com.ochiwerks.apps.gallery.domain.Resource.class.getName() + ".authors");
+            createCache(cm, com.ochiwerks.apps.gallery.domain.Metadata.class.getName());
+            createCache(cm, com.ochiwerks.apps.gallery.domain.Author.class.getName());
+            createCache(cm, com.ochiwerks.apps.gallery.domain.Author.class.getName() + ".resources");
+            createCache(cm, com.ochiwerks.apps.gallery.domain.Location.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
