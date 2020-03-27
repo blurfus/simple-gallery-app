@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="author">
+            <h2><span jhiTranslate="galleryApp.author.detail.title">Author</span> {{ author.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="galleryApp.author.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{ author.firstName }}</span>
+                </dd>
+                <dt><span jhiTranslate="galleryApp.author.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{ author.lastName }}</span>
+                </dd>
+                <dt><span jhiTranslate="galleryApp.author.email">Email</span></dt>
+                <dd>
+                    <span>{{ author.email }}</span>
+                </dd>
+                <dt><span jhiTranslate="galleryApp.author.resource">Resource</span></dt>
+                <dd>
+                    <div *ngIf="author.resource">
+                        <a [routerLink]="['/resource', author.resource?.id, 'view']">{{ author.resource?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/author', author.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

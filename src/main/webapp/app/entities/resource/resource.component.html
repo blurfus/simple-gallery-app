@@ -1,0 +1,75 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="galleryApp.resource.home.title">Resources</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-resource" [routerLink]="['/resource/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="galleryApp.resource.home.createLabel">
+            Create a new Resource
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="resources?.length === 0">
+        <span jhiTranslate="galleryApp.resource.home.notFound">No resources found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="resources?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="url"><span jhiTranslate="galleryApp.resource.url">Url</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="isFavourite"><span jhiTranslate="galleryApp.resource.isFavourite">Is Favourite</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="metadata.id"><span jhiTranslate="galleryApp.resource.metadata">Metadata</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="author.id"><span jhiTranslate="galleryApp.resource.author">Author</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let resource of resources ;trackBy: trackId">
+                    <td><a [routerLink]="['/resource', resource.id, 'view']">{{ resource.id }}</a></td>
+                    <td>{{ resource.url }}</td>
+                    <td>{{ resource.isFavourite }}</td>
+                    <td>
+                        <div *ngIf="resource.metadata">
+                            <a [routerLink]="['/metadata', resource.metadata?.id, 'view']" >{{ resource.metadata?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="resource.author">
+                            <a [routerLink]="['/author', resource.author?.id, 'view']" >{{ resource.author?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/resource', resource.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/resource', resource.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(resource)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
